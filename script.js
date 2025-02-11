@@ -1,5 +1,22 @@
+// (1) Create fixed-size container for grid
+
 const container = document.querySelector(".container");
 container.style = "width: 960px;";
+
+// (2) Prompt user for grid size
+
+const startBtn = document.querySelector("button");
+startBtn.addEventListener("click", () => {
+  let size = -1;
+  do {
+    size = prompt("What is the size 'N', of your 'NxN' grid?");
+  } while (size > 100);
+
+  if (document.querySelector(".grid")) document.querySelector(".grid").remove();
+  createGridNode(size);
+});
+
+// (3) Grid creation
 
 function createGridNode(size) {
   const grid = document.createElement("div");
@@ -8,18 +25,7 @@ function createGridNode(size) {
   generateGrid(grid, size, size);
 }
 
-function promptUser() {
-  const startBtn = document.querySelector("button");
-
-  startBtn.addEventListener("click", () => {
-    let size = prompt("What is the size 'N', of your 'NxN' grid?");
-    if (document.querySelector(".grid")) document.querySelector(".grid").remove();
-    createGridNode(size);
-  });
-}
-
 function generateGrid(grid, numRows, numCols) {
-
   for (r = 0; r < numRows; r++) {
     const row = document.createElement("div");
     row.setAttribute("style", "display: flex;");
@@ -40,5 +46,3 @@ function generateGrid(grid, numRows, numCols) {
     }
   }
 }
-
-promptUser();
